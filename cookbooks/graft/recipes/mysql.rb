@@ -3,36 +3,27 @@
 # Recipe:: mysql
 #
 
-version = node["mysql"]["version"]
-
-# Remove existing mysql resources
-execute "apt-get-autoremove" do
-  command "apt-get -y autoremove"
+mysql_service "default" do
+  version node["mysql"]["version"]
+  bind_address "0.0.0.0"
+  port "3306"
+  data_dir "/data"
+  socket "/var/run/mysqld/mysqld.sock"
+  initial_root_password "root"
+  action [:create, :start]
 end
 
-apt_package "mysql*" do
-  notifies :run, "execute[apt-get-autoremove]", :immediately
-  action :purge
-end
-
-# Install mysql from ondrej repo
-apt_repository "mysql-server" do
-  uri "ppa:ondrej/mysql-#{version}"
-  distribution "trusty"
-end
-
-package "mysql-server"
-
-# Copy over config file
-file "/etc/mysql/my.cnf" do
-  content File.read "/srv/config/mysql-config/my.cnf"
+# Copy over custom config file
+file "/etc/mysql-default/conf.d/overrides.cnf" do
+  content File.read "/srv/config/mysql-config/overrides.cnf"
   owner "root"
+  group "root"
   mode "0644"
   action :create
 end
 
-# Start service
-service "mysql" do
-  subscribes :restart, "file[/etc/mysql/my.cnf]", :immediately
-  action [:enable, :start]
+service "mysql-default" do
+  subscribes :restart, "file[/etc/mysql-default/conf.d/overrides.cnf]", :immediately
 end
+
+include_recipe "graft::databases"

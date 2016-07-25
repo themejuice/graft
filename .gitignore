@@ -1,1 +1,10 @@
-.vagrant
+# Vagrant files
+/.vagrant
+
+# Log files
+/log/**/*
+!/log/**/.keep
+
+# Webroot
+/www/**/*
+!/www/default/index.php
