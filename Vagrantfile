@@ -103,11 +103,7 @@ Vagrant.configure "2" do |config|
         logfilename: "memcache.log"
       },
       rvm: {
-        default_ruby: "ruby-2.3.0",
-        global_gems: [
-          { name: "mailcatcher" },
-          { name: "bundler" }
-        ]
+        default_ruby: "ruby-2.3.0"
       },
       mailcatcher: {
         enabled: true
