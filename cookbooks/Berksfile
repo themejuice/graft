@@ -1,0 +1,16 @@
+source "https://supermarket.chef.io"
+
+# metadata
+
+cookbook "system"
+cookbook "locale"
+cookbook "apt"
+# cookbook "vim"
+cookbook "apache2"
+# cookbook "mysqld"
+# cookbook "xdebug"
+# cookbook "memcached"
+# cookbook "rvm"
+# cookbook "mailcatcher"
+# cookbook "nvm"
+cookbook "graft", path: "graft"
