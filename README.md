@@ -12,7 +12,7 @@ manage and deploy local WordPress development projects at the click of a button.
 
 **Graft VM is a high-quality LAMP development environment, configured specifically
 for WordPress development, that comes prepackaged and requires no provisioning so
-that you can get up and running as soon as possible.**
+that you can get up and running as quickly as possible.**
 
 ### What is Vagrant?
 [Vagrant](http://www.vagrantup.com) is a "tool for building and distributing development
