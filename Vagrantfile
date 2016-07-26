@@ -78,6 +78,9 @@ Vagrant.configure "2" do |config|
     chef.add_recipe "graft::ruby"
     chef.add_recipe "graft::mailcatcher"
     chef.add_recipe "graft::node"
+    chef.add_recipe "graft::phpmyadmin"
+    chef.add_recipe "graft::phpmemcacheadmin"
+    chef.add_recipe "graft::webgrind"
 
     chef.json = {
       system: {
