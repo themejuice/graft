@@ -16,4 +16,5 @@
 
 # Webroot
 /www/**/*
+!/www/default/phpinfo/index.php
 !/www/default/index.php
