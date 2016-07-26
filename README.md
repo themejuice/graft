@@ -23,8 +23,8 @@ and recreated at anytime, so feel free to break things!
 
 ### Installation
 You can either use [`tj`](https://github.com/themejuice/cli) to set up your
-development environment, or run the commands below from whatever directory you
-want the VM installed:
+development environment, or you can run the commands below from whatever directory
+you want the VM to be installed into:
 
 ```bash
 git clone https://github.com/themejuice/graft
