@@ -21,6 +21,17 @@ software such as [VirtualBox](https://www.virtualbox.org/) to provide a virtual 
 that is sandboxed away from your local environment. It can be shutdown, destroyed
 and recreated at anytime, so feel free to break things!
 
+### Dependencies
+Before you install, please ensure you have Vagrant and VirtualBox installed,
+along with the following Vagrant plugins:
+
+- `vagrant-berkshelf` (>= 4.1.0)
+- `vagrant-triggers` (>= 0.5.3)
+- `landrush` (>= 0.18.0)
+
+You may install them with `vagrant install <plugin>`. To view your currently
+installed plugins, run `vagrant plugin list`.
+
 ### Installation
 You can either use [`tj`](https://github.com/themejuice/cli) to set up your
 development environment, or you can run the commands below from whatever directory
