@@ -61,7 +61,7 @@ Vagrant.configure "2" do |config|
   config.berkshelf.enabled = true
   config.berkshelf.berksfile_path = "cookbooks/Berksfile"
 
-  config.vm.provision :chef_solo do |chef|
+  config.vm.provision :chef_solo, run: "always" do |chef|
     chef.cookbooks_path = %w[cookbooks]
 
     chef.add_recipe "system"
@@ -140,10 +140,10 @@ Vagrant.configure "2" do |config|
   # - Run the database init script after the VM is booted or reloaded
   # - Run the database backup script before the VM is shutdown or reloaded
   if Vagrant.has_plugin? "vagrant-triggers"
-    config.trigger.after [:up], stdout: false do
+    config.trigger.after [:up], stdout: true do
       run "vagrant ssh -c '/srv/scripts/init-db.sh'"
     end
-    config.trigger.before [:suspend, :halt, :destroy], stdout: false do
+    config.trigger.before [:suspend, :halt, :destroy], stdout: true do
       run "vagrant ssh -c '/srv/scripts/backup-db.sh'"
     end
   end
