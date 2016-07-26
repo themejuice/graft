@@ -4,11 +4,10 @@ DEPENDENCIES
   graft
     path: graft
   locale
-  mailcatcher (~> 0.1.0)
   memcached (~> 3.0)
   mysql (~> 7.0)
   nodejs (~> 2.0)
-  rvm_sl
+  rvm_sl (~> 2.0)
   system
   vim
 
@@ -38,7 +37,6 @@ GRAPH
     build-essential (>= 2.1.2)
   hostsfile (2.4.5)
   locale (1.1.0)
-  mailcatcher (0.1.0)
   memcached (3.0.1)
     compat_resource (>= 12.10)
     runit (>= 1.2.0)
