@@ -67,8 +67,8 @@ http://graft.dev
 
 ## Customization
 You may customize your PHP, MySql and Apache configurations by modifying their
-corresponding configuration file within `config/`. The changes will be synced
-to the virtual machine on the next `up` or `reload`.
+corresponding 'overrides' file within `config/`. The changes will be synced to
+the virtual machine on the next `up` or `reload`.
 
 You may disable Mailcatcher and/or Xdebug from within the `Vagrantfile` within
 the Chef provisioning block. When changed, you will need to reprovision the VM
