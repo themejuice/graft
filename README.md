@@ -49,7 +49,6 @@ vagrant up
 - [phpMyAdmin](http://www.phpmyadmin.net/) (Dashboard)
 - [phpMemcachedAdmin](https://code.google.com/p/phpmemcacheadmin/) (Dashboard)
 - [Webgrind](https://github.com/jokkedk/webgrind) (Dashboard)
-- [OPcache Status](https://github.com/rlerdorf/opcache-status) (Dashboard)
 - GD/Imagick
 - SQLite
 - cURL

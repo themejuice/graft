@@ -9,9 +9,6 @@
     <a href="/phpmemcacheadmin"><code>phpmemcacheadmin</code></a>
   </li>
   <li>
-    <a href="/opcache-status"><code>opcache-status</code></a>
-  </li>
-  <li>
     <a href="/webgrind"><code>webgrind</code></a>
   </li>
 </ul>
