@@ -64,6 +64,8 @@ Vagrant.configure "2" do |config|
     chef.add_recipe "system"
     chef.add_recipe "locale"
     chef.add_recipe "apt"
+    chef.add_recipe "git"
+    chef.add_recipe "vim"
 
     chef.add_recipe "graft::certs"
     chef.add_recipe "graft::apache"
