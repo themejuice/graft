@@ -97,8 +97,7 @@ Vagrant.configure "2" do |config|
       apache: {
         listen: %w[*:80 *:443],
         group: "www-data",
-        user: "vagrant",
-        mpm: "prefork"
+        user: "vagrant"
       },
       memcached: {
         listen: "0.0.0.0",
