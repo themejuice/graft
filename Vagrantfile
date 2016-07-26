@@ -119,7 +119,11 @@ Vagrant.configure "2" do |config|
         enabled: true
       },
       nodejs: {
-        version: "6.3.0"
+        install_method: "binary",
+        version: "6.3.0",
+        binary: {
+          checksum: "9302affb9844ec9a51e774169072bff3421c0232f746b3d504ba6c13c749ff9f"
+        }
       }
     }
   end
