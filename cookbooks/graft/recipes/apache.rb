@@ -4,6 +4,18 @@
 #
 
 include_recipe "apache2"
+
+# TODO: This is a hack to resolve https://github.com/svanzoest-cookbooks/apache2/issues/355
+service "apache2" do
+  ignore_failure true
+  notifies :run, "execute[wait-for-apache2]", :immediately
+end
+
+execute "wait-for-apache2" do
+  command "sleep 2"
+  action :nothing
+end
+
 include_recipe "apache2::mod_rewrite"
 include_recipe "apache2::mod_headers"
 include_recipe "apache2::mod_deflate"
