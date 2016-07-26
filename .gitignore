@@ -5,6 +5,10 @@
 /log/**/*
 !/log/**/.keep
 
+# Database files and backups
+/database/**/*
+!/database/backup/.keep
+
 # Webroot
 /www/**/*
 !/www/default/index.php
