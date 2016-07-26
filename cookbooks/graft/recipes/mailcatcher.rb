@@ -82,7 +82,7 @@ end
 # Install mailcatcher
 script "mailcatcher" do
   interpreter "bash"
-  user "root"
+  user "vagrant"
   cwd "/tmp"
   code <<-EOH
     if ! type mailcatcher &> /dev/null; then
