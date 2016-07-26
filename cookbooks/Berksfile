@@ -1,7 +1,5 @@
 source "https://supermarket.chef.io"
 
-# metadata
-
 cookbook "system"
 cookbook "locale"
 cookbook "apt"
@@ -9,7 +7,7 @@ cookbook "vim"
 cookbook "apache2", "~> 3.0"
 cookbook "mysql", "~> 7.0"
 cookbook "memcached", "~> 3.0"
-cookbook "rvm", "~> 0.9.4"
+cookbook "rvm_sl", "~> 2.0"
 cookbook "mailcatcher", "~> 0.1.0"
 cookbook "nodejs", "~> 2.0"
 cookbook "graft", path: "graft"

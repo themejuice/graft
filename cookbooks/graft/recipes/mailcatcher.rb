@@ -4,17 +4,14 @@
 #
 
 if node["mailcatcher"]["enabled"]
+  package "libsqlite3-dev"
+
   script "mailcatcher" do
     interpreter "bash"
-    user "root"
+    user "vagrant"
     cwd "/tmp"
     code <<-EOH
-      if type mailcatcher &> /dev/null; then
-        rvm wrapper default@mailcatcher --no-prefix mailcatcher catchmail
-      else
-        rvm default@mailcatcher --create do gem install mailcatcher --no-rdoc --no-ri
-        rvm wrapper default@mailcatcher --no-prefix mailcatcher catchmail
-      fi
+      mailcatcher --ip=0.0.0.0
     EOH
   end
 end

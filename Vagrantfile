@@ -22,6 +22,9 @@ Vagrant.configure "2" do |config|
     ip: "192.168.13.37"
   }
 
+  # Add forwarded port for Mailcatcher
+  config.vm.network :forwarded_port, host: 1080, guest: 1080
+
   # Fix 'no tty' output
   config.vm.provision "fix-no-tty", type: "shell" do |s|
     s.privileged = false
@@ -103,7 +106,14 @@ Vagrant.configure "2" do |config|
         logfilename: "memcache.log"
       },
       rvm: {
-        default_ruby: "ruby-2.3.0"
+        user: {
+          name: "vagrant",
+          home: "/home/vagrant"
+        }
+      },
+      ruby: {
+        version: "2.3.0",
+        gems: %w[]
       },
       mailcatcher: {
         enabled: true

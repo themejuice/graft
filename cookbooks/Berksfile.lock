@@ -8,7 +8,7 @@ DEPENDENCIES
   memcached (~> 3.0)
   mysql (~> 7.0)
   nodejs (~> 2.0)
-  rvm (~> 0.9.4)
+  rvm_sl
   system
   vim
 
@@ -24,7 +24,6 @@ GRAPH
     compat_resource (>= 12.10)
     mingw (>= 1.1)
     seven_zip (>= 0.0.0)
-  chef_gem (0.1.0)
   chef_handler (1.4.0)
   compat_resource (12.10.7)
   cron (1.7.6)
@@ -34,14 +33,10 @@ GRAPH
     memcached (>= 0.0.0)
     mysql (>= 0.0.0)
     nodejs (>= 0.0.0)
-    rvm (>= 0.0.0)
+    rvm_sl (>= 0.0.0)
   homebrew (2.1.0)
     build-essential (>= 2.1.2)
   hostsfile (2.4.5)
-  java (1.41.0)
-    apt (>= 0.0.0)
-    homebrew (>= 0.0.0)
-    windows (>= 0.0.0)
   locale (1.1.0)
   mailcatcher (0.1.0)
   memcached (3.0.1)
@@ -65,9 +60,7 @@ GRAPH
   runit (1.8.0)
     packagecloud (>= 0.0.0)
     yum-epel (>= 0.0.0)
-  rvm (0.9.4)
-    chef_gem (>= 0.0.0)
-    java (>= 0.0.0)
+  rvm_sl (2.0.0)
   seven_zip (2.0.1)
     windows (>= 1.2.2)
   smf (2.2.8)
