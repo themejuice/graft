@@ -10,7 +10,8 @@
 !/log/**/.keep
 
 # Database files and backups
-/database/**/*
+/database/init-custom.sql
+/database/backup/*
 !/database/backup/.keep
 
 # Webroot

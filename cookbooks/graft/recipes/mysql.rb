@@ -25,5 +25,3 @@ end
 service "mysql-default" do
   subscribes :restart, "file[/etc/mysql-default/conf.d/overrides.cnf]", :immediately
 end
-
-include_recipe "graft::databases"

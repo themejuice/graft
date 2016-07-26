@@ -34,6 +34,9 @@ Vagrant.configure "2" do |config|
   # Resource configuration files
   config.vm.synced_folder "config", "/srv/config"
 
+  # Various shell scripts
+  config.vm.synced_folder "scripts", "/srv/scripts"
+
   # Database resources and backups
   config.vm.synced_folder "database", "/srv/database"
 
@@ -131,5 +134,17 @@ Vagrant.configure "2" do |config|
         }
       }
     }
+  end
+
+  # If the vagrant-triggers plugin is installed:
+  # - Run the database init script after the VM is booted or reloaded
+  # - Run the database backup script before the VM is shutdown or reloaded
+  if defined? VagrantPlugins::Triggers
+    config.trigger.after [:up], stdout: false do
+      run "vagrant ssh -c '/srv/scripts/init-db.sh'"
+    end
+    config.trigger.before [:suspend, :halt, :destroy], stdout: false do
+      run "vagrant ssh -c '/srv/scripts/backup-db.sh'"
+    end
   end
 end
