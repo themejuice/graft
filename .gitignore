@@ -1,6 +1,10 @@
 # Vagrant files
 /.vagrant
 
+# Conf files
+/config/apache-config/sites/*
+!/config/apache-config/sites/graft.conf
+
 # Log files
 /log/**/*
 !/log/**/.keep
