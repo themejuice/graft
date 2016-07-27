@@ -23,10 +23,9 @@ file "/etc/init.d/mailcatcher" do
     GROUP=root
 
     start() {
-      echo -n "Starting MailCatcher"
+      echo "mailcatcher start/running"
       if start-stop-daemon --stop --quiet --pidfile $PID_FILE --signal 0
       then
-        echo " already running."
         exit
       fi
       start-stop-daemon \\
@@ -41,17 +40,15 @@ file "/etc/init.d/mailcatcher" do
         -- \\
         --foreground \\
         --ip=0.0.0.0
-      echo "."
       return $?
     }
 
     stop() {
-      echo -n "Stopping MailCatcher"
+      echo "mailcatcher stop/waiting"
       start-stop-daemon \\
         --stop \\
         --oknodo \\
         --pidfile $PID_FILE
-      echo "."
       return $?
     }
 
