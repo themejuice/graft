@@ -138,7 +138,7 @@ file within the `/database/backup/` directory. These will then be imported
 automatically on each `vagrant up`, even if your VM has recently been `destroy`'d.
 
 **This is done so that you have the freedom to run `vagrant destroy` without
-losing all that precious data within stored in your databases.**
+losing all that precious data stored within your databases.**
 
 ## Automatically generated self-signed SSL certs
 When a `.conf` file within `config/apache-config/sites/` contains a virtual host with
