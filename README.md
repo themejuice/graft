@@ -22,15 +22,19 @@ that is sandboxed away from your local environment. It can be shutdown, destroye
 and recreated at anytime, so feel free to break things!
 
 ### Dependencies
-Before you install, please ensure you have Vagrant and VirtualBox installed,
-along with the following Vagrant plugins:
+Before you run `vagrant up`, please ensure you have the following software installed,
+- [Vagrant](http://www.vagrantup.com) (>= 1.8)
+- [VirtualBox](https://www.virtualbox.org/) (>= 5.0)
+- [ChefDK](https://downloads.chef.io/chef-dk/) (>= 0.16)
 
+Along with these Vagrant plugins,
 - `vagrant-berkshelf` (>= 4.1.0)
 - `vagrant-triggers` (>= 0.5.3)
 - `landrush` (>= 0.18.0)
 
-You may install them with `vagrant install <plugin>`. To view your currently
-installed plugins, run `vagrant plugin list`.
+You can install the plugins with `vagrant plugin install <plugin>` if you do not
+already have them installed. To view your currently installed plugins, run
+`vagrant plugin list` from any directory.
 
 ### Installation
 You can either use [`tj`](https://github.com/themejuice/cli) to set up your
