@@ -11,8 +11,8 @@ utility, [`tj`](https://github.com/themejuice/cli), that enables you to create,
 manage and deploy local WordPress development projects at the click of a button.
 
 **Graft VM is a high-quality LAMP development environment, configured specifically
-for WordPress development, that comes prepackaged and requires no provisioning so
-that you can get up and running as quickly as possible.**
+for WordPress development, that comes pre-packaged and pre-provisioned, so that
+you can get up and running as quickly as possible.**
 
 ### What is Vagrant?
 [Vagrant](http://www.vagrantup.com) is a "tool for building and distributing development
