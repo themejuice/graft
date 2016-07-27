@@ -1,5 +1,5 @@
 #!/bin/bash
-#
+
 # Create the databases (unique to system) that will be imported with
 # the mysqldump files located in database/backups/
 if [ -f "/srv/database/init-custom.sql" ]; then

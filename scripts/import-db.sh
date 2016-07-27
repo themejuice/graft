@@ -1,5 +1,5 @@
 #!/bin/bash
-#
+
 # Import provided SQL files in to MySQL.
 #
 # The files in the /database/backups/ directory should be created by mysqldump

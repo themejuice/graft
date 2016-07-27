@@ -1,5 +1,5 @@
 #!/bin/bash
-#
+
 # Create individual SQL files for each database. These files
 # are imported automatically during an initial provision if
 # the databases exist per the import-sql.sh process.

@@ -61,7 +61,7 @@ Vagrant.configure "2" do |config|
   config.berkshelf.enabled = true
   config.berkshelf.berksfile_path = "cookbooks/Berksfile"
 
-  config.vm.provision :chef_solo, run: "always" do |chef|
+  config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = %w[cookbooks]
 
     chef.add_recipe "system"
@@ -135,6 +135,13 @@ Vagrant.configure "2" do |config|
       }
     }
   end
+
+  # Service startups (always run)
+  config.vm.provision :shell, {
+    path: File.join("scripts", "init-services.sh"),
+    name: "services",
+    run: "always"
+  }
 
   # If the vagrant-triggers plugin is installed:
   # - Run the database init script after the VM is booted or reloaded
