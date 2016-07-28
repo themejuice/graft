@@ -57,13 +57,7 @@ Vagrant.configure "2" do |config|
   customfile = File.join VAGRANT_DIR, "Customfile"
   eval IO.read(customfile), binding if File.exist? customfile
 
-  # Chef provisioning
-  config.berkshelf.enabled = true
-  config.berkshelf.berksfile_path = "cookbooks/Berksfile"
-
   config.vm.provision :chef_solo do |chef|
-    chef.cookbooks_path = %w[cookbooks]
-
     chef.add_recipe "system"
     chef.add_recipe "locale"
     chef.add_recipe "apt"

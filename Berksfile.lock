@@ -3,7 +3,7 @@ DEPENDENCIES
   apt
   git
   graft
-    path: graft
+    path: cookbooks/graft
   locale
   memcached (~> 3.0)
   mysql (~> 7.0)
@@ -20,7 +20,7 @@ GRAPH
     build-essential (>= 0.0.0)
     seven_zip (>= 0.0.0)
     windows (>= 0.0.0)
-  build-essential (6.0.2)
+  build-essential (6.0.3)
     compat_resource (>= 12.10)
     mingw (>= 1.1)
     seven_zip (>= 0.0.0)
@@ -48,7 +48,7 @@ GRAPH
     compat_resource (>= 12.10)
     runit (>= 1.2.0)
     yum-epel (>= 0.0.0)
-  mingw (1.2.3)
+  mingw (1.2.4)
     compat_resource (>= 0.0.0)
     seven_zip (>= 0.0.0)
   mysql (7.2.0)

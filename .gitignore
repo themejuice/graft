@@ -1,3 +1,7 @@
+# Misc
+.DS_Store
+/tmp
+
 # Vagrant files
 /.vagrant
 

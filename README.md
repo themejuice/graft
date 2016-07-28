@@ -22,13 +22,11 @@ that is sandboxed away from your local environment. It can be shutdown, destroye
 and recreated at anytime, so feel free to break things!
 
 ### Dependencies
-Before you run `vagrant up`, please ensure you have the following software installed,
+Before you run `vagrant up`, please ensure you have the following software installed:
 - [Vagrant](http://www.vagrantup.com) (>= 1.8)
 - [VirtualBox](https://www.virtualbox.org/) (>= 5.0)
-- [ChefDK](https://downloads.chef.io/chef-dk/) (>= 0.16)
 
-Along with these Vagrant plugins,
-- `vagrant-berkshelf` (>= 4.1.0)
+Along with these Vagrant plugins:
 - `vagrant-triggers` (>= 0.5.3)
 - `landrush` (>= 0.18.0)
 
