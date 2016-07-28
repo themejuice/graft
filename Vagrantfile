@@ -11,10 +11,6 @@ Vagrant.configure "2" do |config|
     v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
   end
 
-  # Enable agent forwarding on vagrant ssh commands. This allows you to use ssh keys
-  # on your host machine inside the guest. See the manual for `ssh-add`.
-  config.ssh.forward_agent = true
-
   # A private network is created by default – this is the IP address through which
   # your host machine will communicate with the guest
   config.vm.hostname = "graft.dev"
@@ -25,8 +21,25 @@ Vagrant.configure "2" do |config|
   # Add forwarded port for Mailcatcher
   config.vm.network :forwarded_port, host: 1080, guest: 1080
 
+  # Enable agent forwarding on vagrant ssh commands. This allows you to use ssh keys
+  # on your host machine inside the guest. See the manual for `ssh-add`.
+  config.ssh.forward_agent = true
+
+  # Add public key to box, so that we can SSH into it without a password
+  config.vm.provision :shell, name: "add-public-key" do |s|
+    ssh_pub_key = File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip
+
+    s.privileged = false
+    s.inline = <<-SHELL
+      if [ -z \"\$(grep \"#{ssh_pub_key}\" ~/.ssh/authorized_keys )\" ]; then
+        echo -e \"\n#{ssh_pub_key}\" >> ~/.ssh/authorized_keys
+        echo "Public added to ~/.ssh/authorized_keys"
+      fi
+    SHELL
+  end
+
   # Fix 'no tty' output
-  config.vm.provision "fix-no-tty", type: "shell" do |s|
+  config.vm.provision :shell, name: "fix-no-tty" do |s|
     s.privileged = false
     s.inline = "sudo sed -i '/tty/!s/mesg n/tty -s \\&\\& mesg n/' /root/.profile"
   end
