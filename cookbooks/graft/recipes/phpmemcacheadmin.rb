@@ -8,9 +8,9 @@ script "phpmemcacheadmin" do
   user "vagrant"
   group "www-data"
   cwd "/tmp"
-  code <<-EOH
+  code <<-SHELL
     if [ ! -d /srv/www/default/phpmemcacheadmin ]; then
       composer create-project wp-cloud/phpmemcacheadmin /srv/www/default/phpmemcacheadmin
     fi
-  EOH
+  SHELL
 end

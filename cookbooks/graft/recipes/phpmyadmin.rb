@@ -8,9 +8,9 @@ script "phpmyadmin" do
   user "vagrant"
   group "www-data"
   cwd "/tmp"
-  code <<-EOH
+  code <<-SHELL
     if [ ! -d /srv/www/default/phpmyadmin ]; then
       composer create-project phpmyadmin/phpmyadmin /srv/www/default/phpmyadmin
     fi
-  EOH
+  SHELL
 end

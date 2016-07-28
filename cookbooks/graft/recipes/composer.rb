@@ -7,11 +7,11 @@ script "composer" do
   interpreter "bash"
   user "root"
   cwd "/tmp"
-  code <<-EOH
+  code <<-SHELL
     if [ ! -x /usr/local/bin/composer ]; then
       curl -s https://getcomposer.org/installer | php
       chmod +x /tmp/composer.phar
       sudo mv /tmp/composer.phar /usr/local/bin/composer
     fi
-  EOH
+  SHELL
 end

@@ -13,7 +13,7 @@ file "/etc/init.d/mailcatcher" do
   owner "root"
   group "root"
   mode "0755"
-  content <<-EOH
+  content <<-SHELL
     #!/bin/bash
 
     PID_FILE=/var/run/mailcatcher.pid
@@ -72,7 +72,7 @@ file "/etc/init.d/mailcatcher" do
         exit 1
         ;;
     esac
-  EOH
+  SHELL
   action :create
 end
 
@@ -81,13 +81,13 @@ script "mailcatcher" do
   interpreter "bash"
   user "vagrant"
   cwd "/tmp"
-  code <<-EOH
+  code <<-SHELL
     if ! type mailcatcher &> /dev/null; then
       source "#{user_home}/.rvm/scripts/rvm"
       rvm default@mailcatcher --create do gem install mailcatcher --no-rdoc --no-ri
       rvm wrapper default@mailcatcher --no-prefix mailcatcher catchmail
     fi
-  EOH
+  SHELL
 end
 
 # Toggle the mailcatcher service
