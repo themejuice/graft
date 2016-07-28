@@ -10,6 +10,6 @@ mysql -u root -proot -e "show databases" 2> /dev/null | \
   grep -v -F "test" | \
   grep -v -F "Database" | \
   while read db_name; do
-    mysqldump -uroot "$db_name" > "/srv/database/backup/$db_name.sql" 2> /dev/null
+    mysqldump -u root -proot "$db_name" > "/srv/database/backup/$db_name.sql" 2> /dev/null
     echo "Backed up database '$db_name'"
   done
