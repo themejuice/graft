@@ -8,6 +8,7 @@ DEPENDENCIES
   memcached (~> 3.0)
   mysql (~> 7.0)
   nodejs (~> 2.0)
+  resolver
   rvm_sl (~> 2.0)
   system
   vim
@@ -62,6 +63,7 @@ GRAPH
     yum-epel (>= 0.0.0)
   packagecloud (0.2.4)
   rbac (1.0.3)
+  resolver (1.3.0)
   runit (1.8.0)
     packagecloud (>= 0.0.0)
     yum-epel (>= 0.0.0)

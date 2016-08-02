@@ -30,7 +30,7 @@ Vagrant.configure "2" do |config|
     ssh_pub_path = File.join Dir.home, ".ssh", "id_rsa.pub"
     return unless File.exist? ssh_pub_path
 
-    ssh_pub_key = File.readlines(ssh_pub_path).first.strip
+    ssh_pub_key = IO.readlines(ssh_pub_path).first.strip
 
     s.privileged = false
     s.inline = <<-SHELL
@@ -74,6 +74,7 @@ Vagrant.configure "2" do |config|
   eval IO.read(customfile), binding if File.exist? customfile
 
   config.vm.provision :chef_solo do |chef|
+    chef.add_recipe "resolver"
     chef.add_recipe "system"
     chef.add_recipe "locale"
     chef.add_recipe "apt"
@@ -96,6 +97,9 @@ Vagrant.configure "2" do |config|
     chef.add_recipe "graft::webgrind"
 
     chef.json = {
+      resolver: {
+        nameservers: %w[8.8.8.8 8.8.4.4]
+      },
       system: {
         timezone: "America/Chicago"
       },

@@ -1,5 +1,6 @@
 source "https://supermarket.chef.io"
 
+cookbook "resolver"
 cookbook "system"
 cookbook "locale"
 cookbook "apt"
