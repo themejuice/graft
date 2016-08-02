@@ -1,0 +1,26 @@
+---
+driver:
+  name: vagrant
+  network:
+    - ['private_network', { ip: '192.168.0.11' }]
+
+provisioner:
+  name: chef_zero
+  require_chef_omnibus: 12.5.1
+
+platforms:
+  - name: ubuntu-14.04
+    driver:
+      box: opscode-ubuntu-14.04
+      customize:
+        memory: 2048
+
+suites:
+  - name: default
+    run_list:
+      - recipe[rvm_sl::rubies_test]
+    attributes:
+      rvm:
+        user:
+          name: vagrant
+          home: '/home/vagrant'

@@ -1,0 +1,7 @@
+DEPENDENCIES
+  rvm_sl
+    path: .
+    metadata: true
+
+GRAPH
+  rvm_sl (0.1.9)

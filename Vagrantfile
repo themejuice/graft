@@ -74,6 +74,11 @@ Vagrant.configure "2" do |config|
   eval IO.read(customfile), binding if File.exist? customfile
 
   config.vm.provision :chef_solo do |chef|
+
+    # Vendored cookbooks directory – this is so users don't need Chef or Berks
+    # installed on their machine to run the provisioners
+    chef.cookbooks_path = %w[berks-cookbooks]
+
     chef.add_recipe "resolver"
     chef.add_recipe "system"
     chef.add_recipe "locale"

@@ -1,0 +1,43 @@
+{
+  "name": "rvm_sl",
+  "description": "Installs/Configures user install of rvm",
+  "long_description": "[![Cookbook Version](https://img.shields.io/cookbook/v/rvm_sl.svg)](https://community.opscode.com/cookbooks/rvm_sl)\n[![Build Status](https://travis-ci.org/dsaenztagarro/rvm_sl.svg?branch=master)](https://travis-ci.org/dsaenztagarro/rvm_sl)\n[![Code Climate](https://codeclimate.com/github/dsaenztagarro/rvm_sl/badges/gpa.svg)](https://codeclimate.com/github/dsaenztagarro/rvm_sl)\n[![Coverage Status](https://coveralls.io/repos/dsaenztagarro/rvm_sl/badge.svg?branch=master&service=github)](https://coveralls.io/github/dsaenztagarro/rvm_sl?branch=master)\n[![Dependency Status](https://gemnasium.com/dsaenztagarro/rvm_sl.svg)](https://gemnasium.com/dsaenztagarro/rvm_sl)\n\nrvm_sl Cookbook\n===============\n\nManages per-user RVMs and manages installed Rubies.\n\nRequirements\n------------\n\n#### Platforms\n- Ubuntu 14.04 LTS\n\n#### Chef\n- Chef 12.2.0\n\n#### packages\n- `rvm::user_install` - User installation of rvm\n\nAttributes\n----------\n\n#### rvm::user_install\n\nSee `attributes/user_install.rb` for default values.\n\n* `node['rvm']['keyserver']` - Key to import from key server\n* `node['rvm']['rcev-keys']` - Import the keys with the given key IDs from a keyserver\n* `node['rvm']['user']['name']` - The user name for rvm user install\n* `node['rvm']['user']['home']` - The home of the user\n\nResources\n---------\n\nExample install ruby 2.2.3 as default for vagrant user:\n\n```ruby\nrvm_rubies 'ruby-2.2.3' do\n  default true\n  home '/home/vagrant'\n  user_name 'vagrant'\nend\n```\n\nExample install bundler gem for user install ruby 2.2.3:\n\n```ruby\nrvm_gem 'bundler' do\n  home '/home/vagrant'\n  ruby_version 'ruby-2.2.3'\n  user_name 'vagrant'\nend\n```\n\nUsage\n-----\n#### rvm::user_install\n\nJust include `rvm::user_install` in your node's `run_list`:\n\n```json\n{\n  \"name\":\"my_node\",\n  \"run_list\": [\n    \"recipe[rvm::user_install]\"\n  ]\n}\n```\n\nSharing\n-------\n\n```\nknife cookbook site share \"rvm_sl\" \"Package Management\"\n```\n\nTesting\n-------\n\nBefore running `kitchen test`:\n\n```\n# vagrant box matching `.kitchen.yml` platform driver box\nvagrant box add ubuntu-14.04 https://github.com/kraksoft/vagrant-box-ubuntu/releases/download/14.04/ubuntu-14.04-amd64.box\n```\n\nContributing\n------------\n\n1. Fork the repository on Github\n2. Create a named feature branch (like `add_component_x`)\n3. Write your change\n4. Write tests for your change (if applicable)\n5. Run the tests, ensuring they all pass\n6. Submit a Pull Request using Github\n\nLicense and Authors\n-------------------\nAuthors: David Saenz Tagarro\n",
+  "maintainer": "David Saenz Tagarro",
+  "maintainer_email": "david.saenz.tagarro@gmail.com",
+  "license": "All rights reserved",
+  "platforms": {
+    "debian": ">= 0.0.0",
+    "ubuntu": ">= 0.0.0"
+  },
+  "dependencies": {
+
+  },
+  "recommendations": {
+
+  },
+  "suggestions": {
+
+  },
+  "conflicting": {
+
+  },
+  "providing": {
+
+  },
+  "replacing": {
+
+  },
+  "attributes": {
+
+  },
+  "groupings": {
+
+  },
+  "recipes": {
+    "rvm::user_install": "User installation of rvm"
+  },
+  "version": "2.0.0",
+  "source_url": "https://github.com/dsaenztagarro/rvm_sl",
+  "issues_url": "https://github.com/dsaenztagarro/rvm_sl/issues",
+  "privacy": false
+}
