@@ -117,7 +117,7 @@ Vagrant.configure "2" do |config|
         version: "5.6"
       },
       xdebug: {
-        enabled: true
+        enabled: false
       },
       mysql: {
         version: "5.6"

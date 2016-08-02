@@ -94,7 +94,7 @@ config.vm.provision :chef_solo do |chef|
   chef.json = {
     # ...
     xdebug: {
-      enabled: true
+      enabled: false
     },
     # ...
     mailcatcher: {
@@ -121,6 +121,22 @@ supported when changed; they are simply used for provisioning the box.**
 - Hostname: `192.168.13.37`
 - Username: `vagrant`
 - Password: `vagrant`
+
+## Xdebug
+Within `config/php-config/overrides.ini`, you'll see a section devoted to Xdebug.
+By default, it will be commented out. If you'd like to use it, simply activate
+Xdebug within your `Vagrantfile` (shown above), and uncomment the Xdebug settings
+within the `overrides.ini` file.
+
+If you're not going to use it, I'd recommend that you disable Xdebug, as well
+disable the `xdebug.profiler`-related settings:
+
+```ini
+xdebug.profiler_enable = 0
+```
+
+Doing so should dramatically increase your virtual machine's performance. Be sure
+to run `vagrant provision` to sync the configuration changes.
 
 ## Mailcatcher
 Ensure that Mailcatcher is enabled within your `Vagrantfile`, then visit:
