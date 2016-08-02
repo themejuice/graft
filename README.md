@@ -71,7 +71,7 @@ vagrant up
 
 ## Dashboard
 You can view things such as a PHP `phpinfo()` dump, phpMemcachedAdmin, phpMyAdmin,
-Webgrind, OPcache Status and more through the main dashboard:
+Webgrind and more through the main dashboard:
 
 ```
 http://graft.dev
