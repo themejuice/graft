@@ -153,10 +153,10 @@
     .specs__table td:first-of-type {
       font-weight: 700;
     }
-    .specs__table tr:nth-child(odd) {
+    .specs__table tr {
       background-color: #eff0f1;
     }
-    .specs__table tr:nth-child(even) {
+    .specs__table tr:nth-of-type(even) {
       background-color: #e2e5e6;
     }
     .call-to-action {
@@ -170,7 +170,6 @@
       font-size: 2rem;
     }
     .call-to-action__content i {
-      /*color: #ffee1f;*/
       font-size: 1.25em;
       position: relative;
       top: 0.15em;
