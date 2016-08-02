@@ -1,5 +1,5 @@
 # Graft VM
-![Graft VM dashboard screenshot]()
+![Graft VM dashboard screenshot](https://cloud.githubusercontent.com/assets/6979737/17339873/72cacf9a-58b3-11e6-9d8b-9de36283bd4a.png)
 
 ## Getting Started
 
