@@ -82,8 +82,8 @@ You may customize your PHP, MySql and Apache configurations by modifying their
 corresponding 'overrides' file within `config/`. The changes will be synced to
 the virtual machine on the next `up` or `reload`.
 
-You may disable Mailcatcher and/or Xdebug from within the `Vagrantfile` within
-the Chef provisioning block. When changed, you will need to reprovision the VM
+You may disable Mailcatcher and/or Xdebug from within the `Vagrantfile` via the
+Chef provisioning block. When changed, you will need to reprovision the VM
 by running `vagrant provision`.
 
 The Chef provisioning block looks something like this:
@@ -105,7 +105,7 @@ config.vm.provision :chef_solo do |chef|
 end
 ```
 
-**There is an array of options given within the `Vagrantfile` such as PHP, Ruby,
+**There are an array of options given within the `Vagrantfile` such as PHP, Ruby,
 MySQL and Node versions, but none of these are guaranteed to work if modified
 from their current state. Those options are provided as-is and are not officially
 supported when changed; they are simply used for provisioning the box.**
@@ -131,7 +131,7 @@ http://graft.dev:1080
 
 ## Automatic database backup
 By default, **if the `vagrant-triggers` plugin is installed**, a script will run
-on `halt`, `suspend`, and `destroy` that backs up each database to a `$name.sql`
+on `halt`, `suspend`, and `destroy` that backs up each database to a `project.sql`
 file within the `/database/backup/` directory. These will then be imported
 automatically on each `vagrant up`, even if your VM has recently been `destroy`'d.
 
@@ -176,5 +176,5 @@ Know how? Create a pull request!
 Know how? Create a pull request!
 
 ## Need Help?
-* Let us have it! Don't hesitate to open a new issue on GitHub if you run into
-  trouble or have any tips that we need to know.
+* Let us know! Don't hesitate to open a new issue on GitHub if you run into
+  trouble or have any tips that you think we should know.
