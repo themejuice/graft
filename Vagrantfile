@@ -27,13 +27,16 @@ Vagrant.configure "2" do |config|
 
   # Add public key to box, so that we can SSH into it without a password
   config.vm.provision :shell, name: "add-public-key" do |s|
-    ssh_pub_key = File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip
+    ssh_pub_path = File.join Dir.home, ".ssh", "id_rsa.pub"
+    return unless File.exist? ssh_pub_path
+
+    ssh_pub_key = File.readlines(ssh_pub_path).first.strip
 
     s.privileged = false
     s.inline = <<-SHELL
       if [ -z \"\$(grep \"#{ssh_pub_key}\" ~/.ssh/authorized_keys )\" ]; then
         echo -e \"\n#{ssh_pub_key}\" >> ~/.ssh/authorized_keys
-        echo "Public added to ~/.ssh/authorized_keys"
+        echo "Public key added to ~/.ssh/authorized_keys"
       fi
     SHELL
   end
