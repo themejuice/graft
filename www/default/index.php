@@ -30,6 +30,10 @@
       text-decoration: none;
       border-bottom: 2px solid rgba(109,129,132,0.25);
     }
+    code,
+    pre {
+      font-family: "Ubuntu Mono", monospace;
+    }
     .header {
       position: relative;
       width: 100%;
@@ -442,15 +446,15 @@
     <table class="specs__table">
       <tr>
         <td>Host</td>
-        <td>localhost</td>
+        <td><code>localhost</code></td>
       </tr>
       <tr>
         <td>User</td>
-        <td>root</td>
+        <td><code>root</code></td>
       </tr>
       <tr>
         <td>Password</td>
-        <td>root</td>
+        <td><code>root</code></td>
       </tr>
     </table>
 
@@ -458,15 +462,15 @@
     <table class="specs__table">
       <tr>
         <td>Host</td>
-        <td><a href="http://<?php echo $_SERVER["SERVER_ADDR"]; ?>"><?php echo $_SERVER["SERVER_ADDR"]; ?></a></td>
+        <td><a href="http://<?php echo $_SERVER["SERVER_ADDR"]; ?>"><code><?php echo $_SERVER["SERVER_ADDR"]; ?></code></a></td>
       </tr>
       <tr>
         <td>User</td>
-        <td>vagrant</td>
+        <td><code>vagrant</code></td>
       </tr>
       <tr>
         <td>Password</td>
-        <td>vagrant</td>
+        <td><code>vagrant</code></td>
       </tr>
     </table>
 
@@ -474,7 +478,7 @@
     <table class="specs__table">
       <tr>
         <td>URL</td>
-        <td><a href="http://<?php echo $_SERVER["SERVER_ADDR"]; ?>:1080"><?php echo $_SERVER["SERVER_ADDR"]; ?>:1080</a></td>
+        <td><a href="http://<?php echo $_SERVER["SERVER_ADDR"]; ?>:1080"><code><?php echo $_SERVER["SERVER_ADDR"]; ?>:1080</code></a></td>
       </tr>
     </table>
 
