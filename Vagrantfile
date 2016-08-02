@@ -2,7 +2,8 @@ VAGRANT_VERSION = Vagrant::VERSION.sub /^v/, ""
 VAGRANT_DIR = File.expand_path File.dirname(__FILE__)
 
 Vagrant.configure "2" do |config|
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "themejuice/graft"
+  config.vm.box_version = "2.0.0"
 
   config.vm.provider :virtualbox do |v|
     v.customize ["modifyvm", :id, "--memory", 2048]
