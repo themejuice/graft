@@ -3,7 +3,7 @@ VAGRANT_DIR = File.expand_path File.dirname(__FILE__)
 
 Vagrant.configure "2" do |config|
   config.vm.box = "themejuice/graft"
-  config.vm.box_version = "2.0.1"
+  config.vm.box_version = "2.0.2"
 
   config.vm.provider :virtualbox do |v|
     v.customize ["modifyvm", :id, "--memory", 2048]
