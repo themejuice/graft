@@ -197,8 +197,8 @@ Know how? Create a pull request!
 * Let us know! Don't hesitate to open a new issue on GitHub if you run into
   trouble or have any tips that you think we should know.
 
-## Development
-During development, change the Vagrant box to `ubuntu/trusty64`,
+## Contributing/Development
+If you decide to take part in Graft's development, change the Vagrant box to `ubuntu/trusty64`,
 
 ```ruby
 Vagrant.configure "2" do |config|
