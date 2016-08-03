@@ -40,7 +40,7 @@ development environment, or you can run the commands below from whatever directo
 you want the VM to be installed into:
 
 ```bash
-git clone https://github.com/themejuice/graft
+git clone https://github.com/themejuice/graft .
 vagrant up
 ```
 
