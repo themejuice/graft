@@ -136,7 +136,7 @@ xdebug.profiler_enable = 0
 ```
 
 Doing so should dramatically increase your virtual machine's performance. Be sure
-to run `vagrant provision` to sync the configuration changes.
+to run `vagrant provision` to put any changes/modifications you make into effect.
 
 ## Mailcatcher
 Ensure that Mailcatcher is enabled within your `Vagrantfile`, then visit:
@@ -146,13 +146,15 @@ http://graft.dev:1080
 ```
 
 ## Automatic database backup
-By default, **if the `vagrant-triggers` plugin is installed**, a script will run
-on `halt`, `suspend` that backs up each database to a `project.sql` file within
+**By default, if the `vagrant-triggers` plugin is installed**, a script will run
+on `halt` and `suspend` that backs up each database to a `project.sql` file within
 the `/database/backup/` directory. These will then be imported automatically on
 each `vagrant up`, even if your VM has recently been `destroy`'d.
 
 **This is done so that you have the freedom to run `vagrant destroy` without
-losing all that precious data stored within your databases.**
+losing all that precious data stored within your databases.** Just remember that
+the database _is not_ backed up on `destroy`, so be sure to run `vagrant halt`
+before a destroy if you want to back everything up.
 
 ## Automatically generated self-signed SSL certs
 When a `.conf` file within `config/apache-config/sites/` contains a virtual host with
