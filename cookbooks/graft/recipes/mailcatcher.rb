@@ -24,8 +24,7 @@ file "/etc/init.d/mailcatcher" do
 
     start() {
       echo "mailcatcher start/running"
-      if start-stop-daemon --stop --quiet --pidfile $PID_FILE --signal 0
-      then
+      if start-stop-daemon --stop --quiet --pidfile $PID_FILE --signal 0; then
         exit
       fi
       start-stop-daemon \\
@@ -48,12 +47,13 @@ file "/etc/init.d/mailcatcher" do
       start-stop-daemon \\
         --stop \\
         --oknodo \\
-        --pidfile $PID_FILE
+        --pidfile $PID_FILE > /dev/null 2>&1
       return $?
     }
 
     restart() {
       stop
+      sleep 1
       start
     }
 
