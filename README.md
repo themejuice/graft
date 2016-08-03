@@ -211,7 +211,33 @@ end
 ```
 
 that way we can be sure that we run the provisioners on a fresh box before
-building a new Atlas release.
+building a new Atlas release. After provisioning the new release, SSH into the
+virtual machine and run the following commands to clean up:
+
+```bash
+# Clean up apt's cache
+sudo apt-get clean
+
+# Zero out the drive
+sudo dd if=/dev/zero of=/EMPTY bs=1M
+sudo rm -f /EMPTY
+
+# Remove everything from /tmp
+sudo rm -rf /tmp/*
+
+# Remove any of your public keys
+sudo vi ~/.ssh/authorized_keys
+
+# Stop services and remove their PIDs
+sudo service apache2 stop
+sudo service mysql-default stop
+sudo service memcached stop
+sudo service mailcatcher stop
+sudo rm /run/mailcatcher.pid
+
+# Clear bash history and exit
+cat /dev/null > ~/.bash_history && history -c && exit
+```
 
 #### Notes
 We're using [Berkshelf](http://berkshelf.com/) to vendor our cookbooks. You can
