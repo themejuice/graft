@@ -196,3 +196,27 @@ Know how? Create a pull request!
 ## Need Help?
 * Let us know! Don't hesitate to open a new issue on GitHub if you run into
   trouble or have any tips that you think we should know.
+
+## Development
+During development, change the Vagrant box to `ubuntu/trusty64`,
+
+```ruby
+Vagrant.configure "2" do |config|
+  # config.vm.box = "themejuice/graft"
+  # config.vm.box_version = "2.0.2"
+  config.vm.box = "ubuntu/trusty64"
+
+  # ...
+end
+```
+
+that way we can be sure that we run the provisioners on a fresh box before
+building a new Atlas release.
+
+#### Notes
+We're using [Berkshelf](http://berkshelf.com/) to vendor our cookbooks. You can
+see our configuration within the `Berksfile`. Before shipping a new build for
+the Vagrant box and uploading to Atlas, be sure to run `berks vendor`, so that
+the end-user can does not need to have Berkshelf or the ChefDK installed on
+their machine. Vagrant will use the cookbooks inside of the `berks-cookbooks`
+directory automatically when provisioning with Chef Solo.
