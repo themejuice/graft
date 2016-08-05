@@ -26,8 +26,8 @@ if [ $sql_count != "0" ]; then
     db_name=${file%%.sql}
     mysql_cmd='SHOW TABLES FROM `'$db_name'`' # Required to support hypens in database names
     db_exist=`mysql -u root -proot --skip-column-names -e "$mysql_cmd" 2> /dev/null`
-    if [ "$?" == "0" ] && [ "" == "$db_exist" ]; then
-      mysql -u root -proot $db_name < $db_name.sql 2> /dev/null
+    if [ "$?" == "0" ] && [ "$db_exist" != "" ]; then
+      mysql -u root -proot "$db_name" < "$db_name.sql" 2> /dev/null
       echo "Imported backup database '$db_name'"
     fi
   done
