@@ -1,5 +1,5 @@
-VAGRANT_VERSION = Vagrant::VERSION.sub /^v/, ""
-VAGRANT_DIR = File.expand_path File.dirname(__FILE__)
+vagrant_version = Vagrant::VERSION.sub /^v/, ""
+vagrant_dir = File.expand_path File.dirname(__FILE__)
 
 Vagrant.configure "2" do |config|
   config.vm.box = "themejuice/graft"
@@ -71,7 +71,7 @@ Vagrant.configure "2" do |config|
   }
 
   # Load in Customfile containing local projects and configuration
-  customfile = File.join VAGRANT_DIR, "Customfile"
+  customfile = File.join vagrant_dir, "Customfile"
   eval IO.read(customfile), binding if File.exist? customfile
 
   config.vm.provision :chef_solo do |chef|
