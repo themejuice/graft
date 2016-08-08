@@ -252,7 +252,7 @@
           <a class="navigation__link" href="http://www.themejuice.it/docs">Documentation</a>
         </li>
         <li class="navigation__item">
-          <a class="navigation__link" href="http://www.themejuice.it/support">Support</a>
+          <a class="navigation__link" href="https://themejuice.zendesk.com/hc/en-us">Support</a>
         </li>
         <li class="navigation__item">
           <a class="navigation__link" href="http://www.themejuice.it">Desktop App</a>
