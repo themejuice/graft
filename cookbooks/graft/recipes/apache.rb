@@ -21,6 +21,13 @@ include_recipe "apache2::mod_headers"
 include_recipe "apache2::mod_deflate"
 include_recipe "apache2::mod_ssl"
 
+# Remove previous sites
+Dir.glob "/etc/apache2/sites-enabled/*.conf" do |conf|
+  file conf do
+    action :delete
+  end
+end
+
 # Copy over existing sites
 Dir.glob "/srv/config/apache-config/sites/*.conf" do |conf|
   file "/etc/apache2/sites-enabled/#{File.basename conf}" do
