@@ -7,7 +7,7 @@
 Graft is the official virtual machine for [Theme Juice](https://www.themejuice.it),
 a powerful way to develop WordPress sites locally on your machine. Theme Juice is
 a cross-platform desktop application built on top of our open source command line
-utility, [`tj`](https://github.com/themejuice/cli), that enables you to create,
+utility, [`tj`](https://github.com/themejuice/tj), that enables you to create,
 manage and deploy local WordPress development projects at the click of a button.
 
 **Graft VM is a high-quality LAMP development environment, configured specifically
@@ -35,7 +35,7 @@ already have them installed. To view your currently installed plugins, run
 `vagrant plugin list` from any directory.
 
 ### Installation
-You can either use [`tj`](https://github.com/themejuice/cli) to set up your
+You can either use [`tj`](https://github.com/themejuice/tj) to set up your
 development environment, or you can run the commands below from whatever directory
 you want the VM to be installed into:
 
@@ -183,7 +183,7 @@ certificate, another one will not be generated until the old one is removed.
 
 #### OS X Instructions
 Since it's a little unintuitive, I'll link you off [to this great tutorial on
-accepting a self-signed cert](https://www.accuweaver.com/2014/09/19/make-chrome-accept-a-self-signed-certificate-on-osx/).
+accepting a self-signed cert](http://www.accuweaver.com/2014/09/19/make-chrome-accept-a-self-signed-certificate-on-osx/).
 
 You may need to restart your browser to see this change take effect.
 
