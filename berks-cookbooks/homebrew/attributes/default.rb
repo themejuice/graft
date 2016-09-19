@@ -4,7 +4,7 @@
 # Cookbook Name:: homebrew
 # Attributes:: default
 #
-# Copyright 2011-2013, Chef Software, Inc.
+# Copyright 2011-2016, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,8 +18,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
-default['homebrew']['owner'] = nil
+# only used if auto detection fails
+default['homebrew']['owner'] = nil # only used if auto detection fails
 default['homebrew']['auto-update'] = true
 default['homebrew']['casks'] = []
 default['homebrew']['formulas'] = node['homebrew']['formula'] || []

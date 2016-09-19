@@ -2,6 +2,23 @@
 
 This file is used to list changes made in each version of the runit cookbook.
 
+## 3.0.0 (2016-09-16)
+- Testing updates
+- Require Chef 12.1+
+
+## 2.0.0 (2016-08-30)
+
+- Remove support for Gentoo as we have no way to test this
+- Remove the empty library file
+- Run specs against the latest RHEL 5
+- Basic convergence testing in Travis CI
+- Remove the need for apt in test kitchen
+
+## 1.8.1 (2016-08-30)
+
+- Enable runit installation in Oracle Linux systems
+- Remove double oracle in the metadata
+
 ## 1.8.0
 
 - Breaking change: Removed support for EOL Ubuntu platforms (i.e. versions 6.10, 7.04, 7.10, 8.04) (#194)

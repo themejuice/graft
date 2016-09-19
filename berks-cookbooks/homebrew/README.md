@@ -46,6 +46,13 @@ The only platform supported by Homebrew itself at the time of this writing is Ma
       head: true
     ```
 
+  - To provide other options, specify both its name and options
+
+    ```
+    - name: formula-with-options
+      options: --with-option-1 --with-other-option
+    ```
+
 - `node['homebrew']['casks']` - An Array of casks that should be installed using brew cask by default, used only in the `homebrew::install_casks` recipe.
 - `node['homebrew']['taps']` - An Array of taps that should be installed using brew tap by default, used only in the `homebrew::install_taps` recipe.
 
@@ -151,7 +158,7 @@ Author:: Joshua Timberman ([joshua@chef.io](mailto:joshua@chef.io))
 
 ```text
 Copyright:: 2011, Graeme Mathieson
-Copyright:: 2012-2015, Chef Software, Inc. <legal@chef.io>
+Copyright:: 2012-2016, Chef Software, Inc. <legal@chef.io>
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

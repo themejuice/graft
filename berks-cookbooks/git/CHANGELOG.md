@@ -2,6 +2,14 @@
 
 This file is used to list changes made in each version of the git cookbook.
 
+## 5.0.1 (2016-09-15)
+- Clarify we require Chef 12.1 or later
+
+## 5.0.0 (2016-09-02)
+- Require Chef 12 or later
+- Don't depend on the windows cookbook since windows_package is built into Chef 12
+- Updates for testing
+
 ## v4.6.0 (2016-07-05)
 
 - Added support for compiling git on suse

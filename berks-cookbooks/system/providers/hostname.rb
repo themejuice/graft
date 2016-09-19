@@ -28,25 +28,34 @@ class Chef
 end
 
 action :set do
-  # first, ensure lower case for each piece
-  new_resource.short_hostname.downcase! if new_resource.short_hostname
-  new_resource.domain_name.downcase! if new_resource.domain_name
+  # user can specify short_hostname and domain_name or simply
+  # derive it from the name of the resource
 
-  # logically build the fqdn depending on how the user specified
-  short_hostname = new_resource.hostname.split('.').first
-  short_hostname = new_resource.short_hostname if new_resource.short_hostname
-  domain_name    = if new_resource.domain_name
-                     new_resource.domain_name
-                   elsif new_resource.hostname.split('.').count >= 2
-                     new_resource.hostname.split('.')[1..-1].join('.')
+  short_hostname = if new_resource.short_hostname
+                     new_resource.short_hostname
                    else
-                     # fallback domain name to 'localdomain'
-                     # to complete a valid FQDN
-                     node['system']['domain_name']
+                     # as the resource must have a name, there will always
+                     # be one result from the split
+                     new_resource.hostname.split('.').first
                    end
 
-  # piece together the fqdn
-  fqdn = "#{short_hostname}.#{domain_name}".downcase
+  domain_name = if new_resource.domain_name
+                  new_resource.domain_name
+                elsif new_resource.hostname.split('.').count >= 2
+                  new_resource.hostname.split('.')[1..-1].join('.')
+                else
+                  # fallback domain name to 'localdomain'
+                  # to complete a valid FQDN
+                  node['system']['domain_name']
+                end
+
+  # finally, raise if we don't have a valid hostname
+  # http://en.wikipedia.org/wiki/Hostname
+  raise "#{short_hostname} is not a valid hostname!" unless \
+    short_hostname =~ /^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$/
+
+  # reconstruct the fqdn
+  fqdn = "#{short_hostname}.#{domain_name}"
   ::Chef::Log.debug "FQDN determined to be: #{fqdn}"
 
   # https://tickets.opscode.com/browse/OHAI-389
@@ -249,10 +258,10 @@ action :set do
     block do
       fe = ::Chef::Util::FileEdit.new('/etc/sysconfig/network')
       fe.search_file_replace_line(/HOSTNAME\=/, "HOSTNAME=#{fqdn}")
+      fe.insert_line_if_no_match(/HOSTNAME\=/, "HOSTNAME=#{fqdn}")
       fe.write_file
     end
-    only_if { platform_family?('rhel') }
-    only_if { node['platform_version'] < '7.0' }
+    only_if { ::File.exist?('/etc/sysconfig/network') }
     not_if { ::File.readlines('/etc/sysconfig/network').grep(/HOSTNAME=#{fqdn}/).any? }
     notifies :restart, 'service[network]', node['system']['delay_network_restart'] ? :delayed : :immediately
   end
@@ -279,6 +288,28 @@ action :set do
   execute 'run domainname' do
     command "domainname #{new_resource.domain_name}"
     only_if "bash -c 'type -P domainname'"
+    not_if { Mixlib::ShellOut.new('domainname').run_command.stdout.strip == new_resource.domain_name }
+    action :nothing
+  end
+
+  # for systems with cloud-init, ensure preserve hostname
+  # https://aws.amazon.com/premiumsupport/knowledge-center/linux-static-hostname-rhel7-centos7/
+  file '/etc/cloud/cloud.cfg.d/01_preserve_hostname.cfg' do
+    content "preserve_hostname: true\n"
+    only_if { ::File.exist?('/etc/cloud/cloud.cfg.d') }
+  end
+
+  # for systems with nmcli (NetworkManager)
+  execute 'update hostname via nmcli' do
+    command "nmcli general hostname #{short_hostname}"
+    not_if { Mixlib::ShellOut.new('hostname -s').run_command.stdout.strip == short_hostname }
+    only_if "bash -c 'type -P nmcli'"
+  end
+
+  # for systemd systems with systemd-hostnamed unit
+  service 'systemd-hostnamed' do
+    provider ::Chef::Provider::Service::Systemd
+    only_if 'systemctl is-enabled systemd-hostnamed'
     action :nothing
   end
 
@@ -310,6 +341,7 @@ action :set do
     action :create
     notifies :start, resources("service[#{service_name}]"), :immediately if platform?('debian', 'raspbian')
     notifies :restart, resources("service[#{service_name}]"), :immediately if platform?('ubuntu')
+    notifies :restart, resources('service[systemd-hostnamed]'), :delayed
     notifies :create, 'ruby_block[update network sysconfig]', :immediately
     notifies :run, 'execute[run domainname]', :immediately
     notifies :run, 'execute[run hostname]', :immediately

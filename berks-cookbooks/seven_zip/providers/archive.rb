@@ -39,22 +39,30 @@ action :extract do
     cmd << " -o\"#{win_friendly_path(@new_resource.path)}\""
     cmd << " \"#{local_source}\""
     Chef::Log.debug(cmd)
-    shell_out!(cmd)
+    shell_out!(cmd, timeout: extract_timeout)
   end
 end
 
 def seven_zip_exe
   path = if node['seven_zip']['home']
-           # If the installation home is specifically set, use it
            node['seven_zip']['home']
          else
-           require 'win32/registry'
-           # Read path from recommended Windows App Paths registry location
-           # docs: https://msdn.microsoft.com/en-us/library/windows/desktop/ee872121
-           ::Win32::Registry::HKEY_LOCAL_MACHINE.open(
-             'SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\7zFM.exe',
-             ::Win32::Registry::KEY_READ).read_s('Path')
+           seven_zip_exe_from_registry
          end
   Chef::Log.debug("Using 7-zip home: #{path}")
   win_friendly_path(::File.join(path, '7z.exe'))
+end
+
+def seven_zip_exe_from_registry
+  require 'win32/registry'
+  # Read path from recommended Windows App Paths registry location
+  # docs: https://msdn.microsoft.com/en-us/library/windows/desktop/ee872121
+  ::Win32::Registry::HKEY_LOCAL_MACHINE.open(
+    'SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\7zFM.exe',
+    ::Win32::Registry::KEY_READ
+  ).read_s('Path')
+end
+
+def extract_timeout
+  @new_resource.timeout || node['seven_zip']['default_extract_timeout']
 end

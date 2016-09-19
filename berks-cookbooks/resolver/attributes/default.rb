@@ -1,6 +1,6 @@
 #
 # Author:: Joshua Timberman <joshua@chef.io>
-# Copyright:: Copyright (c) 2009-2015, Chef Software, Inc.
+# Copyright:: Copyright (c) 2009-2016, Chef Software, Inc.
 # License:: Apache License, Version 2.0
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,4 +20,3 @@ default['resolver']['search'] = node['domain']
 default['resolver']['domain'] = nil
 default['resolver']['nameservers'] = []
 default['resolver']['options'] = {}
-default['resolver']['server_role'] = 'nameserver'

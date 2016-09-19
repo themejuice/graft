@@ -3,14 +3,15 @@
 # Cookbook Name:: windows
 # Provider:: feature_powershell
 #
-use_inline_resources if defined?(use_inline_resources)
+
+use_inline_resources
 
 include Chef::Provider::WindowsFeature::Base
 include Chef::Mixin::PowershellOut
 include Windows::Helper
 
 def install_feature_cmdlet
-  node['os_version'].to_f < 6.2 ? 'Add-WindowsFeature' : 'Install-WindowsFeature'
+  node['os_version'].to_f < 6.2 ? 'Import-Module ServerManager;Add-WindowsFeature' : 'Install-WindowsFeature'
 end
 
 def remove_feature_cmdlet

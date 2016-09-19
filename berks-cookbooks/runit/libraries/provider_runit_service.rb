@@ -3,8 +3,8 @@
 # Provider:: service
 #
 # Author:: Joshua Timberman <jtimberman@chef.io>
-# Author:: Sean OMeara <sean@chef.io>
-# Copyright 2011-2015, Chef Software, Inc.
+# Author:: Sean OMeara <sean@sean.io>
+# Copyright 2011-2016, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -39,7 +39,7 @@ class Chef
         )
       end
 
-      use_inline_resources if defined?(use_inline_resources)
+      use_inline_resources
 
       def whyrun_supported?
         true

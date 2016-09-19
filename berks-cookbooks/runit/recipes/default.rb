@@ -33,7 +33,9 @@ when 'rhel', 'fedora'
   unless node['runit']['prefer_local_yum']
     include_recipe 'yum-epel' if node['platform_version'].to_i < 7
 
-    packagecloud_repo 'imeyer/runit'
+    packagecloud_repo 'imeyer/runit' do
+      force_os 'rhel' if node['platform'].eql?('oracle')
+    end
   end
 
   package 'runit'
@@ -43,23 +45,9 @@ when 'rhel', 'fedora'
     only_if { node['platform_version'].to_i == 7 }
   end
 
-when 'debian', 'gentoo'
-
-  if platform?('gentoo')
-    template '/etc/init.d/runit-start' do
-      source 'runit-start.sh.erb'
-      mode '0755'
-    end
-
-    service 'runit-start' do
-      action :nothing
-    end
-  end
-
+when 'debian'
   package 'runit' do
     action :install
-    response_file 'runit.seed' if platform?('ubuntu', 'debian')
-    notifies :run, 'execute[start-runsvdir]', :immediately if platform?('gentoo')
-    notifies :enable, 'service[runit-start]' if platform?('gentoo')
+    response_file 'runit.seed'
   end
 end

@@ -33,7 +33,8 @@ windows_path 'seven_zip' do
     else
       ::Win32::Registry::HKEY_LOCAL_MACHINE.open(
         'SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\7zFM.exe',
-        ::Win32::Registry::KEY_READ).read_s('Path')
+        ::Win32::Registry::KEY_READ
+      ).read_s('Path')
     end
   }
   action :add

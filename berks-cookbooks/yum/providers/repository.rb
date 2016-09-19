@@ -18,24 +18,23 @@
 # limitations under the License.
 #
 
-# In Chef 11 and above, calling the use_inline_resources method will
-# make Chef create a new "run_context". When an action is called, any
-# nested resources are compiled and converged in isolation from the
-# recipe that calls it.
-
-# Allow for Chef 10 support
-use_inline_resources if defined?(use_inline_resources)
+use_inline_resources
 
 def whyrun_supported?
   true
 end
 
-action :create do
-  # Hack around the lack of "use_inline_resources" before Chef 11 by
-  # uniquely naming the execute[yum-makecache] resources. Set the
-  # notifies timing to :immediately for the same reasons. Remove both
-  # of these when dropping Chef 10 support.
+action :add do
+  Chef::Log.warn('The :add method in yum_repository has been deprecated in favor of :create. Please update your cookbook to use the :create action')
+  action_create
+end
 
+action :remove do
+  Chef::Log.warn('The :remove method in yum_repository has been deprecated in favor of :delete. Repository deletion in Chef 12.14+ with :remove will fail')
+  action_delete
+end
+
+action :create do
   if new_resource.clean_headers
     Chef::Log.warn <<-eos
       Use of `clean_headers` in resource yum[#{new_resource.repositoryid}] is now deprecated and will be removed in a future release.
@@ -109,6 +108,3 @@ action :makecache do
     action :run
   end
 end
-
-alias_method :action_add, :action_create
-alias_method :action_remove, :action_delete

@@ -27,3 +27,5 @@ else
   default['seven_zip']['checksum']     = 'eaf58e29941d8ca95045946949d75d9b5455fac167df979a7f8e4a6bf2d39680'
   default['seven_zip']['package_name'] = '7-Zip 15.14'
 end
+
+default['seven_zip']['default_extract_timeout'] = 600

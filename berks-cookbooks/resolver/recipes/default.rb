@@ -2,7 +2,7 @@
 # Cookbook Name:: resolver
 # Recipe:: default
 #
-# Copyright 2009-2015, Chef Software, Inc.
+# Copyright 2009-2016, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,12 +19,17 @@
 # = Requires
 # * node[:resolver][:nameservers]
 
+def docker_guest?
+  node['virtualization'] && node['virtualization']['systems'] &&
+    node['virtualization']['systems']['docker'] && node['virtualization']['systems']['docker'] == 'guest'
+end
+
 if node['resolver']['nameservers'].empty? || node['resolver']['nameservers'][0].empty?
   Chef::Log.warn("#{cookbook_name}::#{recipe_name} requires that attribute ['resolver']['nameservers'] is set.")
-  Chef::Log.info("#{cookbook_name}::#{recipe_name} will exit to prevent a potential breaking change in /etc/resolv.conf.")
+  Chef::Log.info("#{cookbook_name}::#{recipe_name} exiting to prevent a potential breaking change in /etc/resolv.conf.")
   return
 else
-  template '/etc/resolv.conf' do
+  t = template '/etc/resolv.conf' do
     source 'resolv.conf.erb'
     owner 'root'
     group node['root_group']
@@ -32,4 +37,5 @@ else
     # This syntax makes the resolver sub-keys available directly
     variables node['resolver']
   end
+  t.atomic_update false if docker_guest?
 end
