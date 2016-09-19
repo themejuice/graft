@@ -82,6 +82,7 @@ Vagrant.configure "2" do |config|
 
     chef.add_recipe "resolver"
     chef.add_recipe "system"
+    chef.add_recipe "system::profile"
     chef.add_recipe "locale"
     chef.add_recipe "apt"
     chef.add_recipe "git"
@@ -107,7 +108,12 @@ Vagrant.configure "2" do |config|
         nameservers: %w[8.8.8.8 8.8.4.4]
       },
       system: {
-        timezone: "America/Chicago"
+        timezone: "America/Chicago",
+        profile: {
+          path_append: %w[
+            /usr/local/nodejs-binary-6.3.0/bin/
+          ]
+        }
       },
       locale: {
         lang: "en_US.utf8",
