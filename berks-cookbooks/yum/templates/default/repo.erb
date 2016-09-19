@@ -4,13 +4,8 @@
 [<%= @config.repositoryid %>]
 name=<%= @config.description %>
 <% if @config.baseurl %>
-baseurl=<%= case @config.baseurl
-     when Array
-       @config.baseurl.join("\n")
-     else
-       @config.baseurl
-     end %>
-<% end -%>
+baseurl=<%= @config.baseurl %>
+<% end %>
 <% if @config.cost %>
 cost=<%= @config.cost %>
 <% end %>

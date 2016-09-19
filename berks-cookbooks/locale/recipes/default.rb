@@ -2,8 +2,7 @@
 # Cookbook Name:: locale
 # Recipe:: default
 #
-# Copyright 2011-2016, Heavy Water Software Inc.
-# Copyright 2016, Chef Software Inc.
+# Copyright 2011, Heavy Water Software Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,6 +21,11 @@ lang = node['locale']['lang']
 lc_all = node['locale']['lc_all'] || lang
 
 if File.exist?('/usr/sbin/update-locale')
+  # FIXME: do we really need to install this??!?!
+  package 'locales' do
+    action :install
+  end
+
   execute 'Generate locale' do
     command "locale-gen #{lang}"
     not_if { Locale.up_to_date?('/etc/default/locale', lang, lc_all) }
@@ -53,5 +57,5 @@ elsif File.exist?('/etc/sysconfig/i18n')
     not_if { Locale.up_to_date?(locale_file_path, lang, lc_all) }
   end
 else
-  raise "#{node['platform']} platform not supported by the locale cookbook."
+  raise 'platform not supported'
 end

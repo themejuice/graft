@@ -18,7 +18,8 @@
 # limitations under the License.
 #
 
-use_inline_resources
+# Allow for Chef 10 support
+use_inline_resources if defined?(use_inline_resources)
 
 def whyrun_supported?
   true

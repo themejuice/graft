@@ -2,7 +2,7 @@
 # Cookbook Name:: cron
 # Recipe:: default
 #
-# Copyright 2010-2016, Chef Software, Inc.
+# Copyright 2010-2015, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,9 @@
 # limitations under the License.
 #
 
-package node['cron']['package_name']
+node['cron']['package_name'].each do |pkg|
+  package pkg
+end
 
 service 'cron' do
   service_name node['cron']['service_name'] unless node['cron']['service_name'].nil?

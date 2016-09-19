@@ -17,31 +17,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
-def whyrun_supported?
-  true
-end
-
-use_inline_resources
+use_inline_resources if defined?(use_inline_resources)
 
 action :create do
-  registry_key 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run' do
-    values [{
-      name: new_resource.name,
-      type: :string,
-      data: "\"#{new_resource.program}\" #{new_resource.args}"
-    }]
-    action :create
+  windows_registry 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run' do
+    values new_resource.name => "\"#{new_resource.program}\" #{new_resource.args}"
   end
 end
 
 action :remove do
-  registry_key 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run' do
-    values [{
-      name: new_resource.name,
-      type: :string,
-      data: ''
-    }]
-    action :delete
+  windows_registry 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run' do
+    values new_resource.name => ''
+    action :remove
   end
 end

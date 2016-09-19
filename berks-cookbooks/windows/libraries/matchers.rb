@@ -1,19 +1,24 @@
 if defined?(ChefSpec)
+  chefspec_version = Gem.loaded_specs['chefspec'].version
+  define_method = if chefspec_version < Gem::Version.new('4.1.0')
+                    ChefSpec::Runner.method(:define_runner_method)
+                  else
+                    ChefSpec.method(:define_matcher)
+                  end
 
-  ChefSpec.define_matcher :windows_auto_run
-  ChefSpec.define_matcher :windows_certificate
-  ChefSpec.define_matcher :windows_certificate_binding
-  ChefSpec.define_matcher :windows_feature
-  ChefSpec.define_matcher :windows_font
-  ChefSpec.define_matcher :windows_http_acl
-  ChefSpec.define_matcher :windows_package
-  ChefSpec.define_matcher :windows_pagefile
-  ChefSpec.define_matcher :windows_path
-  ChefSpec.define_matcher :windows_printer
-  ChefSpec.define_matcher :windows_printer_port
-  ChefSpec.define_matcher :windows_shortcut
-  ChefSpec.define_matcher :windows_task
-  ChefSpec.define_matcher :windows_zipfile
+  define_method.call :windows_certificate
+  define_method.call :windows_package
+  define_method.call :windows_feature
+  define_method.call :windows_task
+  define_method.call :windows_path
+  define_method.call :windows_batch
+  define_method.call :windows_pagefile
+  define_method.call :windows_zipfile
+  define_method.call :windows_shortcut
+  define_method.call :windows_auto_run
+  define_method.call :windows_printer
+  define_method.call :windows_printer_port
+  define_method.call :windows_reboot
 
   #
   # Assert that a +windows_certificate+ resource exists in the Chef run with the
@@ -428,6 +433,34 @@ if defined?(ChefSpec)
   end
 
   #
+  # Assert that a +windows_batch+ resource exists in the Chef run with the
+  # action +:run+. Given a Chef Recipe that runs a batch script
+  #
+  #     windows_batch "unzip_and_move_ruby" do
+  #       code <<-EOH
+  #       7z.exe x #{Chef::Config[:file_cache_path]}/ruby-1.8.7-p352-i386-mingw32.7z
+  #          -oC:\\source -r -y
+  #       xcopy C:\\source\\ruby-1.8.7-p352-i386-mingw32 C:\\ruby /e /y
+  #       EOH
+  #     end
+  #
+  # The Examples section demonstrates the different ways to test a
+  # +windows_path+ resource with ChefSpec.
+  #
+  # @example Assert that a +windows_path+ was removed
+  #   expect(chef_run).to run_windows_batch('unzip_and_move_ruby')
+  #
+  #
+  # @param [String, Regex] resource_name
+  #   the name of the resource to match
+  #
+  # @return [ChefSpec::Matchers::ResourceMatcher]
+  #
+  def run_windows_batch(resource_name)
+    ChefSpec::Matchers::ResourceMatcher.new(:windows_batch, :run, resource_name)
+  end
+
+  #
   # Assert that a +windows_pagefile+ resource exists in the Chef run with the
   # action +:set+. Given a Chef Recipe that sets a pagefile
   #
@@ -536,23 +569,12 @@ if defined?(ChefSpec)
     ChefSpec::Matchers::ResourceMatcher.new(:windows_printer_port, :delete, resource_name)
   end
 
-  def install_windows_font(resource_name)
-    ChefSpec::Matchers::ResourceMatcher.new(:windows_font, :install, resource_name)
+  def request_windows_reboot(resource_name)
+    ChefSpec::Matchers::ResourceMatcher.new(:windows_reboot, :request, resource_name)
   end
 
-  def create_windows_certificate_binding(resource_name)
-    ChefSpec::Matchers::ResourceMatcher.new(:windows_certificate_binding, :create, resource_name)
+  def cancel_windows_reboot(resource_name)
+    ChefSpec::Matchers::ResourceMatcher.new(:windows_reboot, :cancel, resource_name)
   end
 
-  def delete_windows_certificate_binding(resource_name)
-    ChefSpec::Matchers::ResourceMatcher.new(:windows_certificate_binding, :delete, resource_name)
-  end
-
-  def create_windows_http_acl(resource_name)
-    ChefSpec::Matchers::ResourceMatcher.new(:windows_http_acl, :create, resource_name)
-  end
-
-  def delete_windows_http_acl(resource_name)
-    ChefSpec::Matchers::ResourceMatcher.new(:windows_http_acl, :delete, resource_name)
-  end
 end

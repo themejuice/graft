@@ -4,7 +4,7 @@ class Chef
       class Package < Chef::Provider::GitClient
         include Chef::DSL::IncludeRecipe
 
-        provides :git_client, os: 'linux'
+        provides :git_client, os: 'linux' if respond_to?(:provides)
 
         action :install do
           # FIXME: rhel 5

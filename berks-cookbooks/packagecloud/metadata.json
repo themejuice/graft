@@ -35,8 +35,14 @@
   "recipes": {
 
   },
-  "version": "0.2.5",
+  "version": "0.2.4",
   "source_url": "https://github.com/computology/packagecloud-cookbook",
   "issues_url": "https://github.com/computology/packagecloud-cookbook/issues",
-  "privacy": false
+  "privacy": false,
+  "chef_versions": [
+
+  ],
+  "ohai_versions": [
+
+  ]
 }

@@ -16,11 +16,7 @@ default['yum']['main']['distroverpkg'] = case node['platform']
                                          else
                                            "#{node['platform']}-release"
                                          end
-# default["yum"]["main"]["releasever"] = nil #  /.*/
-default['yum']['main']['releasever'] = case node['platform']
-                                       when 'amazon'
-                                         'latest'
-                                       end
+
 default['yum']['main']['alwaysprompt'] = nil # [TrueClass, FalseClass]
 default['yum']['main']['assumeyes'] = nil # [TrueClass, FalseClass]
 default['yum']['main']['bandwidth'] = nil # /^\d+$/
@@ -82,6 +78,7 @@ default['yum']['main']['proxy_password'] = nil #  /.*/
 default['yum']['main']['proxy_username'] = nil #  /.*/
 default['yum']['main']['password'] = nil #  /.*/
 default['yum']['main']['recent'] = nil # /^\d+$/
+default['yum']['main']['releasever'] = nil #  /.*/
 default['yum']['main']['repo_gpgcheck'] = nil # [TrueClass, FalseClass]
 default['yum']['main']['reposdir'] = nil #  /.*/
 default['yum']['main']['reset_nice'] = nil # [TrueClass, FalseClass]

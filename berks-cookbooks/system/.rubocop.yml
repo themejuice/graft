@@ -15,6 +15,3 @@ TrivialAccessors:
 
 SpaceBeforeFirstArg:
   Enabled: false
-
-NumericLiteralPrefix:
-  EnforcedOctalStyle: zero_only
