@@ -3,5 +3,5 @@
 #
 [mysqld]
 log_error = /srv/log/mysql/error.log
-general_log_file = /srv/log/mysql/mysql.log
+general_log_file = /srv/log/mysql/access.log
 general_log = 1

@@ -3,6 +3,14 @@
 # Recipe:: mysql
 #
 
+# Monkey patch log directory helper so AppArmor will let us write to our
+# custom log files in /srv/log/mysql/
+module MysqlCookbook::Helpers
+  def log_dir
+    "/srv/log/mysql"
+  end
+end
+
 mysql_service "default" do
   version node["mysql"]["version"]
   bind_address "0.0.0.0"
