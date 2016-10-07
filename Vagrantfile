@@ -60,7 +60,8 @@ Vagrant.configure "2" do |config|
   # Log files
   config.vm.synced_folder "log", "/srv/log", {
     owner: "vagrant",
-    group: "www-data"
+    group: "www-data",
+    mount_options: ["dmode=777", "fmode=777"]
   }
 
   # Web root
