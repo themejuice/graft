@@ -27,7 +27,7 @@ Dir.glob "/srv/config/apache-config/sites/*.conf" do |conf|
     user "root"
     cwd "/tmp"
     code <<-SHELL
-      if [ ! -x "/etc/ssl/certs/#{domain}.pem" ]; then
+      if [ ! -f "/etc/ssl/certs/#{domain}.pem" ]; then
         openssl genrsa -des3 -passout pass:x -out "#{domain}.pass.key" 2048 &>/dev/null
         openssl rsa -passin pass:x -in "#{domain}.pass.key" -out "#{domain}.key" &>/dev/null
         rm "#{domain}.pass.key"
