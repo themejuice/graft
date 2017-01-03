@@ -174,7 +174,7 @@ Vagrant.configure "2" do |config|
   # - Run the database init script after the VM is booted
   # - Run the database backup script before the VM is shutdown
   if Vagrant.has_plugin? "vagrant-triggers"
-    config.trigger.after [:up], stdout: true do
+    config.trigger.after [:up, :provision], stdout: true do
       run "vagrant ssh -c '/srv/scripts/init-db.sh'"
     end
     config.trigger.before [:suspend, :halt], stdout: true do
