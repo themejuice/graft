@@ -10,7 +10,7 @@ script "webgrind" do
   cwd "/tmp"
   code <<-SHELL
     if [ ! -d /srv/www/default/webgrind ]; then
-      composer create-project rovangju/webgrind /srv/www/default/webgrind
+      composer create-project jokkedk/webgrind /srv/www/default/webgrind
     fi
   SHELL
 end
